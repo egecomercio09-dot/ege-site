@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EGE — Consultoria em Licitações & ERP White Label</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14130F;
+    --ink-soft:#1D1B15;
+    --paper:#FAF6EC;
+    --paper-dim:#F1EBDA;
+    --gold:#D9B872;
+    --gold-deep:#B8944A;
+    --gold-pale:#E9D9AE;
+    --text-light:#EFE9D8;
+    --text-muted:#A79F8C;
+    --green:#3B5945;
+    --line:rgba(217,184,114,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--text-light);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  img{display:block;max-width:100%;}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(20,19,15,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand img{height:36px;width:auto;}
+  .brand span{font-family:'Fraunces',serif;font-size:20px;font-weight:600;letter-spacing:0.08em;color:var(--gold-pale);}
+  nav ul{display:flex;gap:36px;list-style:none;}
+  nav a{font-size:14px;color:var(--text-muted);transition:color .2s;}
+  nav a:hover{color:var(--gold);}
+  .nav-cta{
+    border:1px solid var(--gold-deep);
+    padding:10px 20px;
+    border-radius:2px;
+    font-size:13px;
+    letter-spacing:.03em;
+    color:var(--gold-pale) !important;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--ink) !important;border-color:var(--gold);}
+  .mobile-only{display:none;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:180px 0 120px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 700px 500px at 82% 10%, rgba(217,184,114,0.10), transparent 60%);
+    pointer-events:none;
+  }
+  .protocolo{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;letter-spacing:.08em;
+    color:var(--gold);
+    border:1px solid var(--line);
+    padding:8px 14px;
+    border-radius:2px;
+    margin-bottom:32px;
+  }
+  .protocolo .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(59,89,69,0.35);}
+  .hero h1{
+    font-size:clamp(38px,5.4vw,68px);
+    line-height:1.05;
+    color:var(--paper);
+    max-width:840px;
+  }
+  .hero h1 em{font-style:normal;color:var(--gold);}
+  .hero p.lede{
+    margin-top:26px;
+    font-size:18px;
+    color:var(--text-muted);
+    max-width:560px;
+  }
+  .hero-ctas{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--gold);color:var(--ink);
+    padding:15px 28px;border-radius:2px;
+    font-size:14.5px;font-weight:500;letter-spacing:.02em;
+    transition:background .2s, transform .2s;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:var(--gold-pale);transform:translateY(-1px);}
+  .btn-ghost{
+    border:1px solid var(--line);
+    padding:15px 28px;border-radius:2px;
+    font-size:14.5px;color:var(--text-light);
+    transition:border-color .2s, background .2s;
+  }
+  .btn-ghost:hover{border-color:var(--gold-deep);background:rgba(217,184,114,0.06);}
+
+  .selo{
+    position:absolute;
+    right:32px;top:170px;
+    width:170px;height:170px;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    border:1.5px solid var(--gold-deep);
+    border-radius:50%;
+    transform:rotate(-9deg);
+    opacity:.9;
+  }
+  .selo::before{
+    content:"";
+    position:absolute;inset:9px;
+    border:1px dashed var(--gold-deep);
+    border-radius:50%;
+    opacity:.6;
+  }
+  .selo span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;letter-spacing:.14em;
+    color:var(--gold-pale);
+    line-height:1.9;
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:110px 0;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:.14em;
+    color:var(--gold-deep);
+    text-transform:uppercase;
+    margin-bottom:16px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold-deep);}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,42px);color:var(--paper);}
+  .section-head p{margin-top:16px;color:var(--text-muted);font-size:16px;}
+
+  /* ---------- pillars ---------- */
+  .pillars{
+    background:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+    border-top:1px solid var(--line);
+  }
+  .pillar-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .pillar-grid-3{grid-template-columns:1fr 1fr 1fr;}
+  .pillar{background:var(--ink-soft);padding:48px 44px;}
+  .pillar .num{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--gold-deep);letter-spacing:.1em;}
+  .pillar h3{font-size:26px;color:var(--paper);margin:20px 0 14px;}
+  .pillar p{color:var(--text-muted);font-size:15px;margin-bottom:22px;}
+  .pillar ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .pillar li{font-size:14.5px;color:var(--text-light);display:flex;gap:10px;align-items:baseline;}
+  .pillar li::before{content:"—";color:var(--gold-deep);flex-shrink:0;}
+  .pillar a.pillar-link{
+    display:inline-block;margin-top:28px;font-size:13.5px;
+    color:var(--gold);border-bottom:1px solid var(--gold-deep);padding-bottom:2px;
+  }
+
+  /* ---------- how it works ---------- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .step{border-top:1px solid var(--line);padding-top:22px;}
+  .step .n{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-size:13px;}
+  .step h4{font-family:'Fraunces',serif;font-size:19px;color:var(--paper);margin:12px 0 10px;font-weight:600;}
+  .step p{font-size:14px;color:var(--text-muted);}
+
+  /* ---------- ERP white label detail ---------- */
+  .wl{background:var(--paper);color:var(--ink);border-radius:4px;padding:64px;position:relative;overflow:hidden;}
+  .wl .eyebrow{color:var(--gold-deep);}
+  .wl .eyebrow::before{background:var(--gold-deep);}
+  .wl h2{color:var(--ink);font-size:clamp(26px,3.2vw,38px);max-width:600px;}
+  .wl p.desc{color:#5B5646;max-width:560px;margin-top:18px;font-size:15.5px;}
+  .wl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:52px;}
+  .wl-item .mark{
+    width:38px;height:38px;border:1.5px solid var(--gold-deep);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gold-deep);margin-bottom:16px;
+  }
+  .wl-item h4{font-family:'Fraunces',serif;font-size:18px;font-weight:600;margin-bottom:8px;}
+  .wl-item p{font-size:14px;color:#6B6656;}
+
+  /* ---------- cta band ---------- */
+  .cta-band{
+    text-align:center;
+    padding:130px 0;
+    border-top:1px solid var(--line);
+    position:relative;
+  }
+  .cta-band .protocolo{margin-bottom:28px;}
+  .cta-band h2{font-size:clamp(30px,4vw,50px);color:var(--paper);max-width:760px;margin:0 auto;}
+  .cta-band p{color:var(--text-muted);margin:20px auto 0;max-width:480px;}
+  .cta-band .hero-ctas{justify-content:center;margin-top:40px;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:52px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  footer .brand span{font-size:16px;}
+  .foot-links{display:flex;gap:28px;flex-wrap:wrap;}
+  .foot-links a{font-size:13.5px;color:var(--text-muted);}
+  .foot-links a:hover{color:var(--gold);}
+  .foot-note{font-size:12.5px;color:#5c584a;font-family:'IBM Plex Mono',monospace;}
+
+  [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  [data-reveal].in{opacity:1;transform:none;}
+
+  @media(max-width:860px){
+    nav ul{display:none;}
+    .mobile-only{display:block;}
+    .selo{display:none;}
+    .pillar-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .wl{padding:40px 26px;}
+    .wl-grid{grid-template-columns:1fr;}
+    section{padding:76px 0;}
+    .hero{padding:150px 0 80px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo.png" alt="EGE">
+      <span>EGE</span>
+    </div>
+    <nav><ul>
+      <li><a href="#licitacoes">Licitações</a></li>
+      <li><a href="#erp">Sistema ERP</a></li>
+      <li><a href="#certificado">Certificado Digital</a></li>
+      <li><a href="#processo">Como funciona</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul></nav>
+    <a href="#contato" class="nav-cta">Falar com a EGE</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="protocolo"><span class="dot"></span> PROCESSO EGE Nº 001/2026 — CONSULTORIA &amp; TECNOLOGIA</div>
+    <h1>Você vence a <em>licitação</em>.<br>Nós cuidamos do resto — <em>até do sistema</em>.</h1>
+    <p class="lede">Consultoria especializada em licitações públicas, sistema ERP EGE para gestão completa e emissão de certificado digital — tudo com um só parceiro.</p>
+    <div class="hero-ctas">
+      <a href="#contato" class="btn-primary">Solicitar diagnóstico</a>
+      <a href="#erp" class="btn-ghost">Conhecer o sistema ERP EGE</a>
+    </div>
+  </div>
+  <div class="selo"><span>EGE<br>CONSULTORIA<br>&amp; TECNOLOGIA<br>★</span></div>
+</section>
+
+<section class="pillars" id="licitacoes">
+  <div class="wrap" style="padding-top:80px;">
+    <div class="eyebrow">Três frentes, um só parceiro</div>
+    <div class="section-head" style="margin-bottom:0;">
+      <h2>O que a EGE faz por você</h2>
+    </div>
+  </div>
+  <div class="pillar-grid pillar-grid-3" style="margin-top:56px;">
+    <div class="pillar" data-reveal>
+      <div class="num mono">FRENTE 01</div>
+      <h3>Consultoria em Licitações</h3>
+      <p>Assessoria completa para empresas que querem entrar ou crescer no mercado de compras públicas, do primeiro edital ao contrato assinado.</p>
+      <ul>
+        <li>Prospecção e análise de editais compatíveis com o seu negócio</li>
+        <li>Elaboração e revisão de propostas técnicas e comerciais</li>
+        <li>Suporte em habilitação, documentação e impugnações</li>
+        <li>Acompanhamento de sessões e recursos administrativos</li>
+        <li>Gestão de contratos e execução pós-licitação</li>
+      </ul>
+      <a href="#contato" class="pillar-link">Falar sobre licitações →</a>
+    </div>
+    <div class="pillar" id="erp" data-reveal>
+      <div class="num mono">FRENTE 02</div>
+      <h3>Sistema ERP EGE</h3>
+      <p>Um sistema de gestão completo, com a marca EGE, para empresas que querem centralizar financeiro, estoque, vendas e participação em licitações em um só lugar.</p>
+      <ul>
+        <li>Módulos financeiro, estoque, vendas, fiscal e licitações integrados</li>
+        <li>Implantação e configuração feitas pela equipe EGE</li>
+        <li>Atualizações contínuas incluídas na assinatura</li>
+        <li>Treinamento da sua equipe para uso do sistema</li>
+        <li>Suporte direto com a EGE, sem intermediários</li>
+      </ul>
+      <a href="#contato" class="pillar-link">Conhecer o sistema ERP →</a>
+    </div>
+    <div class="pillar" id="certificado" data-reveal>
+      <div class="num mono">FRENTE 03</div>
+      <h3>Certificado Digital</h3>
+      <p>Emissão de certificado digital para pessoa física e jurídica, essencial para participar de licitações eletrônicas e assinar documentos com validade legal.</p>
+      <ul>
+        <li>e-CPF e e-CNPJ, em cartão, token ou nuvem (e-CNPJ A1/A3)</li>
+        <li>Suporte na instalação e configuração</li>
+        <li>Renovação acompanhada pela EGE, sem correria de última hora</li>
+      </ul>
+      <a href="#contato" class="pillar-link">Emitir meu certificado →</a>
+    </div>
+  </div>
+</section>
+
+<section id="processo">
+  <div class="wrap">
+    <div class="eyebrow">Como funciona</div>
+    <div class="section-head">
+      <h2>Do primeiro contato ao resultado</h2>
+      <p>Um processo direto, sem burocracia extra além da que a licitação já exige.</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-reveal>
+        <div class="n mono">01</div>
+        <h4>Diagnóstico</h4>
+        <p>Entendemos seu momento: se você quer entrar em licitações, crescer nelas, ou revender o ERP.</p>
+      </div>
+      <div class="step" data-reveal>
+        <div class="n mono">02</div>
+        <h4>Proposta</h4>
+        <p>Montamos um plano de atuação ou um modelo de white label sob medida para o seu negócio.</p>
+      </div>
+      <div class="step" data-reveal>
+        <div class="n mono">03</div>
+        <h4>Execução</h4>
+        <p>Acompanhamos editais e sessões, ou colocamos o sistema no ar com a sua marca.</p>
+      </div>
+      <div class="step" data-reveal>
+        <div class="n mono">04</div>
+        <h4>Continuidade</h4>
+        <p>Suporte contínuo — novos editais, novos clientes, novas versões do sistema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="wl" data-reveal>
+      <div class="eyebrow">Sistema ERP EGE</div>
+      <h2>Um sistema de gestão pensado para quem vive de licitação</h2>
+      <p class="desc">Da rotina financeira ao acompanhamento de editais, o ERP EGE reúne o que a sua empresa precisa em um só lugar — com implantação e suporte direto da nossa equipe.</p>
+      <div class="wl-grid">
+        <div class="wl-item">
+          <div class="mark mono">A</div>
+          <h4>Financeiro e fiscal</h4>
+          <p>Fluxo de caixa, contas a pagar e receber, emissão de notas em um painel único.</p>
+        </div>
+        <div class="wl-item">
+          <div class="mark mono">B</div>
+          <h4>Licitações integradas</h4>
+          <p>Do controle de editais à execução do contrato, sem planilhas paralelas.</p>
+        </div>
+        <div class="wl-item">
+          <div class="mark mono">C</div>
+          <h4>Suporte EGE</h4>
+          <p>Implantação, treinamento da equipe e atendimento direto, sem intermediários.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contato">
+  <div class="wrap">
+    <div class="protocolo"><span class="dot"></span> ABERTO PARA NOVOS PROCESSOS</div>
+    <h2>Vamos falar sobre o seu próximo edital, o sistema ERP EGE ou seu certificado digital?</h2>
+    <p>Fale diretamente com a equipe EGE e receba um diagnóstico inicial sem compromisso.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5521971254910" class="btn-primary">Chamar no WhatsApp</a>
+      <a href="mailto:egecomercio09@gmail.com" class="btn-ghost">egecomercio09@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><img src="logo.png" alt="EGE" style="height:28px;"><span>EGE</span></div>
+    <div class="foot-links">
+      <a href="#licitacoes">Licitações</a>
+      <a href="#erp">Sistema ERP</a>
+      <a href="#certificado">Certificado Digital</a>
+      <a href="#processo">Como funciona</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="foot-note">© 2026 EGE — CONSULTORIA &amp; TECNOLOGIA</div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
